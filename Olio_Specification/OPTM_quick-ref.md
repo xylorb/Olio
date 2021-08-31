@@ -66,7 +66,7 @@ OPTM Links:
     [displayed link text](literal-link-address)
     [displayed link text]<./#ralis=“literal-link-address”/.>
 
-#### Quick Objects ####
+#### Embedded Objects ####
 Object of Key/Value pairs when starting the line with no spaces before the '{':
 
     {
@@ -75,14 +75,13 @@ Object of Key/Value pairs when starting the line with no spaces before the '{':
 
 Array when starting the line with no spaces before the '[':
 
+    [
+        item
+    ]
 
+Nested Object/Array:
 
-
-:: name ::
-key	
-key = “value”
-
-
-                    	
-
+    :: name ::
+    key	
+    key = “value”
 
