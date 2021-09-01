@@ -24,14 +24,14 @@ types are: boolean; number; string; binary; list/array; dictionary/object/map; a
 
 ### Representations ###
 
-#### Abstract Olio ####
+#### Abstract 'Olio' ####
 
     {
         meta: {},
         body: {}
     }
 
-#### Concrete OlioElement ####
+#### Concrete 'OlioElement' ####
 The most common form of an Olio is the 'OlioElement', which has a meta section comprising a 'label' (string), 'attr' (dictionary of Olio data object’s attributes); and a body section comprising a list of
 “children”.
 
@@ -58,10 +58,11 @@ The label name cannot contain white space. The tag and attribute names cannot co
 
 ##### OPTM Meta Attribute Reserved Keywords #####
 The following keywords are reserved for use with the 'attr' portion:
+
 	label	
-	version			(version info pertaining to OPTM)
-	type			(how to process the olio - default, html, etc.)
-	ralis			(reserved for olio’s ralis identification)
-	linkref			(equivalent to href)
+	version	
+	type
+	ralis
+	linkref	
 
 
