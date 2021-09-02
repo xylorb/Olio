@@ -1,4 +1,5 @@
-# Olio Specification (2021-08-31) #
+# Olio Specification #
+*2021-09-02: currently a work-in-progress*
 
 The Olio Specification defines the general/abstract concept of an ‘olio’ as a data structure and the 
 specification defines some specific/concrete implementations of olios. The word ‘olio’ means “a
