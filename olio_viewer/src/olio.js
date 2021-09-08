@@ -43,6 +43,14 @@ const OPTMTokenTypes = {
 }
 
 
+class Token {
+  constructor(type, value) {
+    this.type = type
+    this.value = value
+  }
+}
+
+
 /* Parsing Functions */
 function tokenize(s) {
   console.log(s)

@@ -1,8 +1,9 @@
 
 
-import OPTM from './olio'
+import OPTM from './src/olio'
 
 let text_edit = document.getElementById('text_edit')
+text_edit.value = "<::>\nHello World!\n<://:>"
 
 
 let o = OPTM.parse(text_edit.value)

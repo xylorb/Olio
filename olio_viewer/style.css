@@ -1,0 +1,19 @@
+body {
+  margin: 2vw;
+  border: 0px;
+  padding: 2vw;
+  width: 100vw;
+  height: 100vh;
+}
+
+#text_edit {
+  box-sizing: border-box;
+  margin: 0%;
+  border: 0px;
+  padding: 2%;
+  width: 90%;
+  height: 90%;
+  background-color: #F5F5F5;
+  font-family: Arial;
+  font-size: 18px;
+}
