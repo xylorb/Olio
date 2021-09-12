@@ -115,10 +115,10 @@ HXL           ::=  '0x'
 #### OPTM Basic ####
 At the most basic level of usage, OPTM doesn't determine formatting for the 'body' portion of data and so there is no need for production rules. Everything between the opening and closing meta tags of an OPTM data/document is simply 'body' or _primary_ data to be formatted and used depending on the particular implementation.
 
-#### OPTM Default ####
+#### OPTM Default Symbols ####
 The default usage context of an OPTM data/document is that the 'body' or _primary_ data is formatted according to OPTM markup/styling. In such cases the following production rules apply.
 
-###### OPTM Symbols (Non-Terminals) ######
+###### Non-Terminals ######
 ```
 START_OLIO        ::=  <OPEN_TAG> <BODY> <CLOSE_TAG>
 OPEN_TAG          ::=  <OTL> <OTR>
@@ -134,7 +134,7 @@ ATTR              ::=  @ |
 TAG               ::=  <ATR> <KEY>
 ASN_VAL           ::=  @ |
                        <ASN> <VAL>
-value             ::=  <QS> <STRING> <QS> |
+VAL               ::=  <QS> <STRING> <QS> |
                        <QD> <STRING> <QD> |
 
 BODY              ::=
@@ -148,7 +148,7 @@ TEXT              ::=
 
 _** where @ means remove symbol, replace symbol with nothing_
 
-#### OPTM Extended ####
+#### OPTM Extended Symbols ####
 Beyond the default usage context of an OPTM data/document the 'body' or _primary_ data is formatted according to OPTM markup/styling that adds more features and abilities. In such cases the following production rules apply.
 
 _** unstable area, developing area_
