@@ -120,9 +120,9 @@ The OPTM format is undergoing active development and is still not in a fully sta
 
 ##### STATUS #####
 
-Overall OPTM: [Semi-Stable; 2021-09-11]
+Overall OPTM: [Semi-Stable; 2021-09-12]
 
-Semi-Formal BNF: [Unstable; 2021-09-11]
+Semi-Formal BNF: [Unstable; 2021-09-12]
 
 ##### Points of Debate #####
 - many ...
