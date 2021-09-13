@@ -16,7 +16,7 @@ For example, an OPTM document might be recorded as follows:
 ```
 <::>
   Hello World!
-<:/ #2021-09-11 #author="me" /:>
+<:/ #2021-01-01 #author="me" /:>
 ```
 In this example, the OPTM data/document consists of everything from the first '<:' to the last '/:>'. The _primary_ data of this OPTM is the string "Hello World!", while the _secondary_ data are two attributes about the primary data (one being a simple tag and the other being key/value pair identifying the author).
 
@@ -31,23 +31,23 @@ OPTM Meta is composed of the same attributes as a generic OlioElement Object: 'l
 The label name cannot contain white space. The tag and attribute names cannot contain white space, but the value of attributes (enclosed in quotes) can contain white space. Tags and attributes are user defined. The entire protocol is in UTF-8. By default an example of plain text in Olio or OlioElement is processed by the OPTM protocol, but the reserved 'attr' '#type' can be used to specify different processing using different data formats.
 
 ## Semi-Formal Pseudo BNF ##
-** _The following is an incomplete rough draft (at this point the OPTM Quick Reference is more reliable)._
+** _The following is an incomplete rough draft (at this point the OPTM Quick Reference is more reliable for the 'body' portion)._
 
 ### Production Rules ###
 
 The OPTM 'production rules' can be divided into multiple subsets depending on the usage context. For example, all OPTM contexts use the same basic set of 'terminals'. However, the _primary_ data or 'body' section of an OPTM data/document may or may not have formatting. And as such, the 'body' section may or may not require production rules for parsing content.
 
-The following will define production rules far a variety of situations.
+The following will define production rules far a variety of situations. The production rules use a pseudo BNF form such that: the '@' character means remove symbol (replace symbol with nothing); the terminal string literals are enclosed in either single quote marks ('') or double quote marks (""); terminal/symbol names are enclosed with or with angle brackets (<>), depending on readability; and spaces are for readability unless enclosed in quotes.
 
 #### OPTM Terminals ####
 ```
-KWD           ::=  ‘TRUE’ | ‘FALSE’ | 'NULL' | 'UNDEF' | 'NONE'
 OTL           ::=  '<:'
 OTR           ::=  ':>'
 CTL           ::=  ‘<:/‘
 CTR           ::=  '/:>'
 STL           ::=  '<..'
 STR           ::=  '..>'
+
 HL1           ::=  ‘###’
 HL2           ::=  ‘==‘
 HL3           ::=  ‘===‘
@@ -58,27 +58,31 @@ ITL           ::=  '^^'
 BLD           ::=  '**'
 STK           ::=  '--'
 HLT           ::=  '::'
-QTS           ::=
-QTD           ::=
+QTS           ::=  "'"
+QTD           ::=  '"'
 CML           ::=  '/*'
 CMR           ::=  '*/'
 SBR           ::=  '~~~~~'
 HBR           ::=  '-----'
-L1            ::=  '.   '
-L2            ::=  '..  '
-L3            ::=  '  - '
-CE            ::=  '- [ ]'
-CC            ::=  '- [x]'
-OL            ::=  '{'
-OR            ::=  '}'
-AL            ::=  '['
-AR            ::=  ']'
+LT1           ::=  '.   '
+LT2           ::=  '..  '
+LT3           ::=  '  - '
+CLE           ::=  '- [ ]'
+CLC           ::=  '- [x]'
+
+KWD           ::=  ‘TRUE’ | ‘FALSE’ |
+                   'NULL' | 'UNDEF'
+OBL           ::=  '{'
+OBR           ::=  '}'
+ARL           ::=  '['
+ARR           ::=  ']'
 ATR           ::=  '#'
 ASN           ::=  '='
-PL            ::=  '('
-PR            ::=  ')'
-AL            ::=  '<'
-AR            ::=  '>'
+PNL           ::=  '('
+PNR           ::=  ')'
+ANL           ::=  '<'
+ANR           ::=  '>'
+EOL           ::=  
 
 BNL           ::=  '0b'
 OCL           ::=  '0o'
@@ -89,20 +93,24 @@ HXL           ::=  '0x'
 
 |  |  |  |  |  |  |  |  |
 |--|--|--|--|--|--|--|--|
-|  |  |  |  |  |  |  |  |
 | OTL | open tag left | OTR | open tag right | CTL | close tag left | CTR | close tag right |
 | STL | special tag left | STR | special tag right |  |  |  |  |
-| SBR | soft bar | HBR | hard bar |  |  |  |  |
-| HL1 | heading level 1 | HL2 | heading level 2 | HL3 | heading level 3 | HL4 | heading level 4 |
-| HL5 | heading level 5 | HL6 | heading level 6 |  |  |  |  |
-| ITL | italic | BLD | bold | STR | strike | HLT | highlight |
-| CML | comment left | CMR | comment right | QTS | quotes single | QTD | quotes double |
-| KWD | keyword |  |  |  |  |  |  |
 |  |  |  |  |  |  |  |  |
-|  |  | L1 | list type 1 | L2 | list type 2 |  |  |
-| L3 | list type 3 | CE | check empty | CC | check checked |  |  |
-| OL | object left | OR | object right | BNL | binary literal |  |  |
-| OCL | octal literal | HXL | hex literal |  |  |  |  |
+| HL1 | heading level 1 | HL2 | heading level 2 | HL3 | heading level 3 | HL4 | heading level 4 |
+| HL5 | heading level 5 | HL6 | heading level 6 | SBR | soft bar | HBR | hard bar |
+| ITL | italic | BLD | bold | STK | strike | HLT | highlight |
+| CML | comment left | CMR | comment right | QTS | quotes single | QTD | quotes double |
+|  |  |  |  |  |  |  |  |
+| LT1 | list type 1 | LT2 | list type 2 | LT3 | list type 3 |  |  |
+| CLE | checklist empty | CLC | checklist checked |  |  |  |  |
+|  |  |  |  |  |  |  |  |
+| KWD | keyword | OBL | object left | OBR | object right |  |  |
+| ARL | array left | ARR | array right | ATR | attribute | ASN | assign |
+| PNL | parentheses left | PNR | parentheses right | ANL | angle left | ANR | angle right |
+|  |  |  |  |  |  |  |  |
+| BNL | binary literal | OCL | octal literal | HXL | hex literal |  |  |
+| EOL | end of line |  |  |  |  |  |  |
+|  |  |  |  |  |  |  |  |
 
 ```
 <char>              ::=  
@@ -112,11 +120,8 @@ HXL           ::=  '0x'
 <string>            ::=  (a-zA-Z0-9 )*
 ```
 
-#### OPTM Basic ####
-At the most basic level of usage, OPTM doesn't determine formatting for the 'body' portion of data and so there is no need for production rules. Everything between the opening and closing meta tags of an OPTM data/document is simply 'body' or _primary_ data to be formatted and used depending on the particular implementation.
-
-#### OPTM Default Symbols ####
-The default usage context of an OPTM data/document is that the 'body' or _primary_ data is formatted according to OPTM markup/styling. In such cases the following production rules apply.
+#### OPTM Basic Symbols ####
+At the most basic level of usage, OPTM doesn't determine formatting for the 'body' portion of data and so there is no need for production rules. Everything between the opening and closing meta tags of an OPTM data/document is simply 'body' or _primary_ data to be formatted and used depending on the particular implementation. The production rules only need to define the overall OPTM data/document and the meta portions.
 
 ###### Non-Terminals ######
 ```
@@ -130,31 +135,55 @@ LABEL             ::=  @ |
                        <KEY>
 KEY               ::=  
 ATTR              ::=  @ |
-                       <TAG> <ASN_VAL>
+                       <TAG> <ASN_PHRASE>
 TAG               ::=  <ATR> <KEY>
-ASN_VAL           ::=  @ |
+ASN_PHRASE        ::=  @ |
                        <ASN> <VAL>
-VAL               ::=  <QS> <STRING> <QS> |
-                       <QD> <STRING> <QD> |
-
-BODY              ::=
-HEADING           ::=
-STYLED            ::=
-LIST              ::=
-OBJECT            ::=
-ARRAY             ::=
-TEXT              ::=
+VAL               ::=  <QTS> <STRING> <QTS> |
+                       <QTD> <STRING> <QTD>
 ```
 
-_** where @ means remove symbol, replace symbol with nothing_
+#### OPTM Default Symbols ####
+The default usage context of an OPTM data/document is that the 'body' or _primary_ data is formatted according to OPTM markup/styling. In such cases the following production rules apply.
+
+###### Non-Terminals ######
+```
+BODY              ::=  @ |
+                       <BLANK_LINE> |
+                       <HEADING> |
+                       <OBJECT> |
+                       <ARRAY> |
+
+BLANK_LINE        ::=  
+HEADING           ::=  <HL1> <TEXT> <HL1> <EOL> |
+                       <HL2> <TEXT> <HL2> <EOL> |
+                       <HL3> <TEXT> <HL3> <EOL> |
+                       <HL4> <TEXT> <HL4> <EOL> |
+                       <HL5> <TEXT> <HL5> <EOL> |
+                       <HL6> <TEXT> <HL6> <EOL>
+STYLED            ::=  <ITL> <TEXT> <ITL> |
+                       <BLD> <TEXT> <BLD> |
+                       <STK> <TEXT> <STK> |
+                       <HLT> <TEXT> <HLT> |
+                       <QTS> <TEXT> <QTS> |
+                       <QTD> <TEXT> <QTD> |
+                       <CML> <TEXT> <CML> |
+                       <CMR> <TEXT> <CMR>
+LIST              ::=
+OBJECT            ::=  <OBL> <OBJ_CONTENT> <OBR>
+OBJ_CONTENT       ::=  
+ARRAY             ::=  <ARL> <ARY_CONTENT> <ARR>
+ARY_CONTENT       ::=  
+TEXT              ::=
+```
 
 #### OPTM Extended Symbols ####
 Beyond the default usage context of an OPTM data/document the 'body' or _primary_ data is formatted according to OPTM markup/styling that adds more features and abilities. In such cases the following production rules apply.
 
-_** unstable area, developing area_
+_** unstable, developing area_
 
 #### OPTM Wrapping ####
-In the OPTM Wrapping context an OPTM data/document formats the 'body' or _primary_ data according to some value or information specified in the 'meta' or _secondary_ data. For example, a meta attribute might indicate the body is to be treated as HTML, JSON, etc. Appropriate production rules would then be employed.
+In the OPTM Wrapping context an OPTM data/document formats the 'body' or _primary_ data according to some value or information specified in the 'meta' or _secondary_ data. For example, a meta attribute might indicate the body is to be treated as HTML, JSON, MD, etc. Appropriate production rules would then be employed.
 
 ## Discussion ##
 
