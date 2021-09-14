@@ -1,23 +1,23 @@
 # OPTM - Quick Reference #
-The following is a non-formal listing of the current OPTM (Olio Plain Text and Meta) format/protocol for quick reference.
+The following is a non-formal listing of the current OPTM (Olio Plain Text and Meta) format for quick reference.
 
 ### OPTM Enclosing Tags ###
 OPTM data/documents enclosing tags:
 
     <::>
-    
+
     <://:>
-    
+
 OPTM data/documents enclosing tags, with label:
 
     <:label:>
-    
+
     <:/label/:>
-    
+
 OPTM data/document enclosing tags, with label and meta:
 
     <:label:>
-    
+
     <:/label #attrTag #attrKey="value" /:>
 
 ### OPTM Enclosed Body ###
@@ -38,7 +38,7 @@ OPTM Text Styling:
     __underline__
     **bold**
     /*comments*/
-    
+
 OPTM Lists:
 
     .   A					
@@ -56,11 +56,11 @@ OPTM Lists:
 OPTM Soft Break:
 
     ~~~~~
-    
+
 OPTM Hard Break:
 
     -----
-   
+
 OPTM Links:
 
     [displayed link text](literal-link-address)
@@ -82,6 +82,5 @@ Array when starting the line with no spaces before the '[':
 Nested Object/Array:
 
     :: name ::
-    key	
+    key
     key = “value”
-

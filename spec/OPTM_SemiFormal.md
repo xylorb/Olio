@@ -74,15 +74,20 @@ KWD           ::=  ‘TRUE’ | ‘FALSE’ |
                    'NULL' | 'UNDEF'
 OBL           ::=  '{'
 OBR           ::=  '}'
-ARL           ::=  '['
-ARR           ::=  ']'
+BRL           ::=  '['
+BRR           ::=  ']'
 ATR           ::=  '#'
 ASN           ::=  '='
+CMA           ::=  ','
 PNL           ::=  '('
 PNR           ::=  ')'
 ANL           ::=  '<'
 ANR           ::=  '>'
+
 EOL           ::=  
+SPC           ::=  ' '
+WSP           ::=
+TAB           ::=  '    '
 
 BNL           ::=  '0b'
 OCL           ::=  '0o'
@@ -104,20 +109,26 @@ HXL           ::=  '0x'
 | LT1 | list type 1 | LT2 | list type 2 | LT3 | list type 3 |  |  |
 | CLE | checklist empty | CLC | checklist checked |  |  |  |  |
 |  |  |  |  |  |  |  |  |
-| KWD | keyword | OBL | object left | OBR | object right |  |  |
-| ARL | array left | ARR | array right | ATR | attribute | ASN | assign |
+| KWD | keyword | OBL | object left | OBR | object right | CMA | comma |
+| BRL | bracket left | BRR | bracket right | ATR | attribute | ASN | assign |
 | PNL | parentheses left | PNR | parentheses right | ANL | angle left | ANR | angle right |
 |  |  |  |  |  |  |  |  |
+| EOL | end of line | SPC | space | WSP | white space | TAB | four spaces |
 | BNL | binary literal | OCL | octal literal | HXL | hex literal |  |  |
-| EOL | end of line |  |  |  |  |  |  |
 |  |  |  |  |  |  |  |  |
 
 ```
-<char>              ::=  
-<digit>             ::=  
-
-<number>            ::=  (0-9)*
-<string>            ::=  (a-zA-Z0-9 )*
+<CHAR>              ::=  'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' |
+                         'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' |
+                         'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' |
+                         'y' | 'z' |
+                         'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' |
+                         'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' |
+                         'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' |
+                         'Y' | 'Z' |
+<DIGIT>             ::=  '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' |
+                         '8' | '9' |
+<CHAR_MISC>         ::=  '_' | '-'
 ```
 
 #### OPTM Basic Symbols ####
@@ -125,22 +136,26 @@ At the most basic level of usage, OPTM doesn't determine formatting for the 'bod
 
 ###### Non-Terminals ######
 ```
-START_OLIO        ::=  <OPEN_TAG> <BODY> <CLOSE_TAG>
-OPEN_TAG          ::=  <OTL> <OTR>
-CLOSE_TAG         ::=  <CTL> <META> <CTR>
-
-META              ::=  @ |
-                       <LABEL> <ATTR>
-LABEL             ::=  @ |
-                       <KEY>
-KEY               ::=  
-ATTR              ::=  @ |
-                       <TAG> <ASN_PHRASE>
-TAG               ::=  <ATR> <KEY>
-ASN_PHRASE        ::=  @ |
-                       <ASN> <VAL>
-VAL               ::=  <QTS> <STRING> <QTS> |
-                       <QTD> <STRING> <QTD>
+START_OLIO          ::=  <OPEN_TAG> <BODY> <CLOSE_TAG>
+OPEN_TAG            ::=  <OTL> <OTR>
+CLOSE_TAG           ::=  <CTL> <META> <CTR>
+META                ::=  @ |
+                         <LABEL> <ATTR>
+LABEL               ::=  @ |
+                         <ID>
+ID                  ::=  <CHAR> <ID_LIST>
+ID_LIST             ::=  @ |
+                         <ID_ITEM> <ID_LIST>
+ID_ITEM             ::=  <CHAR> |
+                         <DIGIT> |
+                         <CHAR_MISC>
+ATTR                ::=  @ |
+                         <TAG> <ASN_PHRASE>
+TAG                 ::=  <ATR> <ID>
+ASN_PHRASE          ::=  @ |
+                         <ASN> <VAL>
+VAL                 ::=  <QTS> <STRING> <QTS> |
+                         <QTD> <STRING> <QTD>
 ```
 
 #### OPTM Default Symbols ####
@@ -149,12 +164,23 @@ The default usage context of an OPTM data/document is that the 'body' or _primar
 ###### Non-Terminals ######
 ```
 BODY              ::=  @ |
-                       <BLANK_LINE> |
+                       <BODY_LIST>
+BODY_LIST         ::=  @ |
+                       <BODY_ITEM> <BODY_LIST>
+BODY_ITEM         ::=  <BLANK_LINE> |
                        <HEADING> |
+                       <PARAGRAPH> |
+                       <LIST> |
+                       <LINK> |
+                       <START_OLIO> |
                        <OBJECT> |
                        <ARRAY> |
-
-BLANK_LINE        ::=  
+                       <ATTR>
+BLANK_LINE        ::=  <BLANK_ITEM> <BLANK_LINE>
+BLANK_ITEM        ::=  <SPC> |
+                       <WSP> |
+                       <TAB> |
+                       <EOL>
 HEADING           ::=  <HL1> <TEXT> <HL1> <EOL> |
                        <HL2> <TEXT> <HL2> <EOL> |
                        <HL3> <TEXT> <HL3> <EOL> |
@@ -169,12 +195,24 @@ STYLED            ::=  <ITL> <TEXT> <ITL> |
                        <QTD> <TEXT> <QTD> |
                        <CML> <TEXT> <CML> |
                        <CMR> <TEXT> <CMR>
-LIST              ::=
+LIST              ::=  
+LIST_ITEM         ::=  
+LINK              ::=  <BRL> <STRING> <BRR> <PNL> <URL> <PNR>
 OBJECT            ::=  <OBL> <OBJ_CONTENT> <OBR>
 OBJ_CONTENT       ::=  
-ARRAY             ::=  <ARL> <ARY_CONTENT> <ARR>
-ARY_CONTENT       ::=  
+ARRAY             ::=  <BRL> <ARY_CONTENT> <BRR>
+ARY_CONTENT       ::=  @ |
+                       <ARY_ITEM> <CMA> <ARY_CONTENT>
+ARY_ITEM          ::=  <NUMBER> |
+                       <STRING> |
+                       <ARRAY> |
+                       <OBJECT> |
+                       <OLIO>
 TEXT              ::=
+STRING            ::=  
+CONTENT           ::=
+URL               ::=  
+PARAGRAPH         ::=  
 ```
 
 #### OPTM Extended Symbols ####
@@ -191,9 +229,9 @@ The OPTM format is undergoing active development and is still not in a fully sta
 
 ##### STATUS #####
 
-Overall OPTM: [Semi-Stable; 2021-09-12]
+Overall OPTM: [Semi-Stable; 2021-09-14]
 
-Semi-Formal BNF: [Unstable; 2021-09-12]
+Semi-Formal BNF: [Unstable; 2021-09-14]
 
 ##### Points of Debate #####
 - many ...
