@@ -1,0 +1,15 @@
+<:\config\:>
+
+:: Global ::
+time_zone := "GMT"
+theme := "bright"
+default := "/home/user"
+
+
+:: Local ::
+local_config := "~/.app"
+local_working := "~/Documents/app"
+theme := "dark"
+email := "me@here.com"
+
+<:/config/:>

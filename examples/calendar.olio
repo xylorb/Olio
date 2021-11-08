@@ -1,0 +1,23 @@
+<:\calendar-examples\:>
+
+<:\example-doc_format-A\:>
+  <:\2021\:>
+    <:\november\:>
+      <:\11\:>
+        "Office Closed"
+      <:/11/:>
+    <:/november/:>
+
+    <:\holidays\:>
+      <:\11-11\:>
+        "Veteran's Day"
+      <:/11-11/:>
+    <:/holidays/:>
+  <:/2021/:>
+<:/example-doc_format-A/:>
+
+<:\example-doc_format-B\:>
+<:/example-doc_format-B/:>
+
+<:|  2021-11-08  |:>
+<:/calendar-examples/:>

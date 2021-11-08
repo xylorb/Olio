@@ -1,0 +1,14 @@
+<:\code-examples\:>
+
+<:\example-A\:>
+  <:\\:>
+    {
+      type="function",
+      arguments = [x, y]
+    }
+    <:  name="myFunctionObject"  :>
+  <://:>
+<:/example-A/:>
+
+<:|  2021-11  |:>
+<:/code-examples/:>
