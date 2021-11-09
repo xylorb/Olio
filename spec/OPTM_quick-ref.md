@@ -80,6 +80,16 @@ OPTM Lists:
     - [ ] C
 ```
 
+OPTM Tree View:
+```
+    +++ root
+        |__ leaf
+        |__ node
+        |   \__ leaf
+        |   \__ leaf
+        \__ leaf
+```
+
 OPTM Soft Break:
 ```
     ~~~~~
@@ -98,6 +108,25 @@ OPTM Links:
     ![alt text]<:  #ralis=“image-literal-link-address”  :>
 ```
 
+Key/Value Definition List:
+```
+    :: name ::
+    key
+    key := “value”
+```
+
+Separated Note:
+```
+    !!! Note: Title
+        Content of Note.
+```
+
+Footnotes:
+```
+    Sentence with footnote. [^1]
+    [^1]: footnote
+```
+
 #### Embedded Objects ####
 Object of Key/Value pairs when starting the line with no spaces before the '{':
 ```
@@ -113,23 +142,7 @@ Array when starting the line with no spaces before the '[':
     ]
 ```
 
-Nested Object/Array:
-```
-    :: name ::
-    key
-    key := “value”
-```
 
-Note:
-```
-    !!Note:
-```
-
-Footnotes:
-```
-    Sentence with footnote. [^1]
-    [^1]: footnote
-```
 
 
 END

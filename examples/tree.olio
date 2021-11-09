@@ -1,0 +1,26 @@
+<:\tree-examples\:>
+
++++ Root Item
+    |__ Sub Element
+    |__ Sub Element
+    |   \__ Sub Sub Element
+    |   \__ Sub Sub Element
+    \__ Sub Element
+
++++ Root
+    \__ Folder
+        \__ Folder
+            |__ Folder
+            \__ Folder
+
++++ Root
+    |__ Folder
+    |   \__ Folder
+    |       |__ Folder
+    |       \__ Folder
+    |__ Folder
+    |   \__ Folder
+    \__ Folder
+
+<:|  2021-11-08  tree-view-hierarchy  |:>
+<:/tree-examples/:>
